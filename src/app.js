@@ -27,7 +27,7 @@ function App({store}) {
                    onClick={() => store.selectItem(item.code)}>
                 <div className='Item-code'>{item.code}</div>
                 <div className='Item-title'>{item.title}
-                  {item.selectedCount ? ' | Выделяли ' + item.selectedCount + ' раз' : ''}
+                  {item.selectedCount ? ' | Выделяли ' + item.selectedCount + ((item.selectedCount % 10 > 1 && item.selectedCount % 10 < 5) ? ' раза' : ' раз') : ''}
                 </div>
                 <div className='Item-actions'>
                   <button onClick={() => store.deleteItem(item.code)}>
