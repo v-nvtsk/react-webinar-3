@@ -7,7 +7,16 @@ import './styles.css';
  * @param store {Store} Хранилище состояния приложения
  * @returns {React.ReactElement}
  */
-function App({store}) {
+  function pluralTimes(n) {
+    let result = ''
+    if (n % 100 > 10 && n % 100 <= 20) {
+      result = ' раз';
+    } else {
+      
+      result = (n % 10 > 1 && n % 10 < 5) ? ' раза' : ' раз';
+    }
+    return result;
+  }
 
   const list = store.getState().list;
 
@@ -27,7 +36,7 @@ function App({store}) {
                    onClick={() => store.selectItem(item.code)}>
                 <div className='Item-code'>{item.code}</div>
                 <div className='Item-title'>{item.title}
-                  {item.selectedCount ? ' | Выделяли ' + item.selectedCount + ((item.selectedCount % 10 > 1 && item.selectedCount % 10 < 5) ? ' раза' : ' раз') : ''}
+                  {item.selectedCount ? ' | Выделяли ' + item.selectedCount + pluralTimes(item.selectedCount) : ''}
                 </div>
                 <div className='Item-actions'>
                   <button onClick={() => store.deleteItem(item.code)}>
