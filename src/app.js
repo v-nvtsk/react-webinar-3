@@ -7,6 +7,8 @@ import './styles.css';
  * @param store {Store} Хранилище состояния приложения
  * @returns {React.ReactElement}
  */
+function App({ store }) {
+
   function pluralTimes(n) {
     let result = ''
     if (n % 100 > 10 && n % 100 <= 20) {
