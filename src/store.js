@@ -43,7 +43,7 @@ class Store {
    * Генератор id для записей с хранением значения в замыкании
    */
   id() {
-    let counter = this.state.list.length;
+    let counter = this.state.list[this.state.list.length - 1].code;
     return () => {
       return ++counter;
     }
