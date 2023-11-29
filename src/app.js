@@ -39,8 +39,9 @@ function App({store}) {
       <Head title='Магазин' />
       <Controls onShowCart={callbacks.onShowCart} cartTotal={cartTotal} />
       <List list={list}
-            onDeleteItem={callbacks.onDeleteItem}
-            onSelectItem={callbacks.onSelectItem}/>
+        actionType='add'
+        onAction={callbacks.onAddItem}
+      />
     </PageLayout>
   );
 }
