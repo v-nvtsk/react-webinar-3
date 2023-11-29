@@ -9,13 +9,14 @@
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 9;
+  padding-left: calc(100vw - 100%);
 }
 
 .modal {
-  position: relative;
   max-height: calc(100% - 64px);
   width: calc(100% - 64px);
   overflow-y: auto;
+  max-width: calc(1024px - 64px);
   border-radius: 10px;
   background: #fff;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
@@ -44,11 +45,6 @@
 
 .Cart-total-value {
   margin-left: 53px;
-}
-
-html,
-body {
-  scrollbar-gutter: stable;
 }
 
 body.scroll-lock {
