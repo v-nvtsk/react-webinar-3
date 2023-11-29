@@ -1,8 +1,9 @@
-import React, {useCallback} from 'react';
+import React, { useCallback, useState } from 'react';
 import List from "./components/list";
 import Controls from "./components/controls";
 import Head from "./components/head";
 import PageLayout from "./components/page-layout";
+import Cart from './components/cart';
 import './app.css';
 
 /**
@@ -42,6 +43,7 @@ function App({store}) {
         actionType='add'
         onAction={callbacks.onAddItem}
       />
+      <Cart cart={cart} isModalActive={isModalShow} onCloseButtonClick={callbacks.onCloseCart} onDeleteItem={callbacks.onDeleteItem} />
     </PageLayout>
   );
 }
