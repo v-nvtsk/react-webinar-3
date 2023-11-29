@@ -15,7 +15,23 @@
 
 .Item-title {
   width: 100%;
+}
+
+.Item-title,
+.Item-price,
+.Item-count {
   padding: 20px 10px;
+}
+
+.Item-price,
+.Item-count {
+  margin-left: auto;
+  min-width: 100px;
+  text-align: right;
+}
+
+.Item-count{
+  padding-right: 34px;
 }
 
 .Item-actions {
