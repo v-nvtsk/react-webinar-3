@@ -1,0 +1,48 @@
+.modal-wrapper {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9;
+}
+
+.modal {
+  position: relative;
+  max-width: 960px;
+  width: calc(100% - 64px);
+  overflow: hidden;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.modal .body {
+  margin-top: 71px;
+}
+
+.modal .footer {
+  height: 130px;
+  padding-right: 120px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.Cart-total {
+  margin-left: auto;
+  text-align: right;
+  font-family: Arial;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.Cart-total-value {
+  margin-left: 53px;
+
+}
