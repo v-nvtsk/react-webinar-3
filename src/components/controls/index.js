@@ -24,11 +24,19 @@ function Controls({ onShowCart, cartTotal }) {
 }
 
 Controls.propTypes = {
-  onAdd: PropTypes.func
+  onShowCart: PropTypes.func,
+  cartTotal: PropTypes.shape({
+    itemsCount: PropTypes.number,
+    totalCost: PropTypes.number
+  })
 };
 
 Controls.defaultProps = {
-  onAdd: () => {}
+  onShowCart: () => { },
+  cartTotal: {
+    itemsCount: 0,
+    totalCost: 0
+  }
 }
 
 export default React.memo(Controls);
