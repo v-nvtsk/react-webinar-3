@@ -23,8 +23,8 @@ function App({store}) {
       store.deleteItem(code);
     }, [store]),
 
-    onSelectItem: useCallback((code) => {
-      store.selectItem(code);
+    onAddItem: useCallback((item) => {
+      store.addItem(item);
     }, [store]),
     onShowCart: () => {
       setModalShow(true);
