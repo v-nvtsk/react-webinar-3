@@ -8,8 +8,11 @@ import { formatMoney } from '../../utils';
 
 export default function Cart({ cart, isModalActive, onCloseButtonClick, onDeleteItem }) {
   if (!isModalActive) {
+    document.body.classList.remove("scroll-lock")
     return null
   }
+  document.body.classList.add("scroll-lock")
+
 
   return ReactDOM.createPortal(
     <div className="modal-wrapper">
