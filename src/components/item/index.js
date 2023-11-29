@@ -16,6 +16,7 @@ function Item(props) {
     <div className='Item'>
       <div className='Item-code'>{props.item.code}</div>
       <div className='Item-title'>{props.item.title}</div>
+      <div className='Item-price'>{formatMoney(props.item.price)}</div>
       <div className='Item-actions'>
         <button onClick={callbacks.onDelete}>
           Удалить
