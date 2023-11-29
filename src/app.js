@@ -13,7 +13,10 @@ import './app.css';
 function App({store}) {
 
   const [isModalShow, setModalShow] = useState(false);
+
   const list = store.getState().list;
+  const cart = store.getState().cart;
+  const cartTotal = cart.total;
 
   const callbacks = {
     onDeleteItem: useCallback((code) => {
