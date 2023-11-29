@@ -11,11 +11,23 @@ export default function Cart({ cart, isModalActive, onCloseButtonClick, onDelete
     document.body.classList.remove("scroll-lock")
     return null
   }
-  document.body.classList.add("scroll-lock")
+  document.body.classList.add("scroll-lock");
+
+  const callbacks = {
+    onBackDropClick: ({ currentTarget, target }) => {
+      if (currentTarget === target) {
+        onCloseButtonClick();
+      }
+    },
+    onEscapeKeyDown: (e) => {
+      if (e.key === 'Escape') onCloseButtonClick();
+    }
+  }
+  document.addEventListener('keydown', callbacks.onEscapeKeyDown)
 
 
   return ReactDOM.createPortal(
-    <div className="modal-wrapper">
+    <div className="modal-wrapper" onClick={callbacks.onBackDropClick}>
       <div className="modal">
         <Head title='Корзина' hasActiveButton={true} onButtonClick={onCloseButtonClick} />
         <div className="body">
