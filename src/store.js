@@ -6,6 +6,13 @@ import {generateCode} from "./utils";
 class Store {
   constructor(initState = {}) {
     this.state = initState;
+    this.state.cart = {
+      list: {},
+      total: {
+        itemsCount: 0,
+        totalCost: 0
+      }
+    };
     this.listeners = []; // Слушатели изменений состояния
   }
 
