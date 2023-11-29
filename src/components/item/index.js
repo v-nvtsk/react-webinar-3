@@ -37,11 +37,12 @@ Item.propTypes = {
     price: PropTypes.number,
     count: PropTypes.number
   }).isRequired,
-  onDelete: PropTypes.func,
-  onSelect: PropTypes.func
+  actionType: PropTypes.oneOf(['add', 'delete']),
+  onAction: PropTypes.func
 };
 
 Item.defaultProps = {
+  actionType: 'add',
   onAction: () => { }
 }
 
