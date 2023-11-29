@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import './style.css';
-import { plural } from "../../utils";
+import { plural, formatMoney } from "../../utils";
 
 function Controls({onAdd}) {
   return (
