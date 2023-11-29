@@ -12,6 +12,7 @@ import './app.css';
  */
 function App({store}) {
 
+  const [isModalShow, setModalShow] = useState(false);
   const list = store.getState().list;
 
   const callbacks = {
@@ -22,10 +23,12 @@ function App({store}) {
     onSelectItem: useCallback((code) => {
       store.selectItem(code);
     }, [store]),
-
-    onAddItem: useCallback(() => {
-      store.addItem();
-    }, [store])
+    onShowCart: () => {
+      setModalShow(true);
+    },
+    onCloseCart: () => {
+      setModalShow(false);
+    }
   }
 
   return (
