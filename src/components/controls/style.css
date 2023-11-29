@@ -2,4 +2,23 @@
   display: flex;
   justify-content: flex-end;
   padding: 20px;
+  gap: 20px;
+  height: 63px;
+}
+
+.Controls-cart {
+  font-size: 18px;
+}
+.Controls-cartInfo {
+  font-weight: 700;
+  margin-left: 15px;
+}
+
+.Controls-actions-btn {
+  width: 80px;
+  height: 21px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  border: 1px solid #767676;
+  background: #efefef;
 }
