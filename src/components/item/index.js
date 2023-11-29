@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import {plural} from "../../utils";
+import { formatMoney } from "../../utils";
 import './style.css';
 
 function Item(props) {
