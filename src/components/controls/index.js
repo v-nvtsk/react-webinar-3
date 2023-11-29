@@ -16,6 +16,9 @@ function Controls({ onShowCart, cartTotal }) {
           {cartTotal.itemsCount > 0 ? cartMessage : emptyCartMessage}
         </span>
       </div>
+      <div className="Controls-actions">
+        <button className='Controls-actions-btn' disabled={!cartTotal.itemsCount} onClick={() => onShowCart()}>Перейти</button>
+      </div>
     </div>
   )
 }
