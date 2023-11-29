@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './style.css';
 import { plural, formatMoney } from "../../utils";
 
-function Controls({onAdd}) {
+function Controls({ onShowCart, cartTotal }) {
   return (
     <div className='Controls'>
       <button onClick={() => onAdd()}>Добавить</button>
