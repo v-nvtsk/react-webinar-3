@@ -1,6 +1,7 @@
 .Item {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   transition: background-color 1s;
 }
 
@@ -13,29 +14,24 @@
   padding: 20px 10px 20px 20px;
 }
 
-.Item-title {
-  width: 100%;
-}
-
-.Item-title,
-.Item-price,
-.Item-count {
-  padding: 20px 10px;
-}
-
-.Item-price,
-.Item-count {
+.Item-price {
   margin-left: auto;
-  min-width: 100px;
   text-align: right;
 }
 
-.Item-count{
-  padding-right: 34px;
+.Item-count {
+  /* padding-right: 34px; */
+  min-width: 100px;
+  text-align: right;
+  padding: 0;
 }
 
 .Item-actions {
-  display: flex;
-  justify-content: flex-end;
-  padding: 20px 20px 20px 10px;
+  text-align: center;
+  width: 120px;
+}
+
+.Item-btn {
+  width: 76px;
+  height: 21px;
 }
