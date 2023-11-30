@@ -22,8 +22,7 @@ function Item(props) {
       }
       <div className='Item-actions'>
         <button className="Item-btn" onClick={callbacks.onAction}>
-          {props.actionType === 'add' && 'Добавить'}
-          {props.actionType === 'delete' && 'Удалить'}
+          {props.actionName}
         </button>
       </div>
     </div>
@@ -37,12 +36,11 @@ Item.propTypes = {
     price: PropTypes.number,
     count: PropTypes.number
   }).isRequired,
-  actionType: PropTypes.oneOf(['add', 'delete']),
+  actionName: PropTypes.oneOf(['Добавить', 'Удалить']),
   onAction: PropTypes.func
 };
 
 Item.defaultProps = {
-  actionType: 'add',
   onAction: () => { }
 }
 

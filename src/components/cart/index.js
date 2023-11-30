@@ -14,7 +14,7 @@ function Cart({ cart, onCloseButtonClick, onDeleteItem }) {
       <div className="Cart-body">
         {
           cart.total.itemsCount > 0 ?
-            <List list={Object.values(cart.list)} actionType='delete' onAction={onDeleteItem} /> :
+            <List list={Object.values(cart.list)} actionName='Удалить' onAction={onDeleteItem} /> :
             <div className="Cart-is-empty">Пусто</div>
         }
       </div>

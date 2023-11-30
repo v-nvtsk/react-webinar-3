@@ -40,10 +40,7 @@ function App({store}) {
     <PageLayout>
       <Head title='Магазин' />
       <Controls onShowCart={callbacks.onShowCart} cartTotal={cartTotal} />
-      <List list={list}
-        actionType='add'
-        onAction={callbacks.onAddItem}
-      />
+      <List list={list} onAction={callbacks.onAddItem} />
       <Modal isModalActive={isModalShow} onCloseButtonClick={callbacks.onCloseCart}>
         <Cart cart={cart} onCloseButtonClick={callbacks.onCloseCart} onDeleteItem={callbacks.onDeleteItem} />
       </Modal>

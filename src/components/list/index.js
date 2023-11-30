@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import Item from "../item";
 import './style.css';
 
-function List({ list, onAction, actionType }) {
+function List({ list, onAction, actionName }) {
   return (
     <div className='List'>{
       list.map(item =>
         <div key={item.code} className='List-item'>
-          <Item item={item} onAction={onAction} actionType={actionType} />
+          <Item item={item} onAction={onAction} actionName={actionName} />
         </div>
       )}
     </div>
@@ -19,15 +19,14 @@ List.propTypes = {
   list: PropTypes.arrayOf(PropTypes.shape({
     code: PropTypes.number
   })).isRequired,
-  onAddItem: PropTypes.func,
-  onSelectItem: PropTypes.func
+  onAction: PropTypes.func,
+  actionName: PropTypes.oneOf(['Добавить', 'Удалить'])
 };
 
 List.defaultProps = {
-  onAddItem: () => {
+  onAction: () => {
   },
-  onSelectItem: () => {
-  },
+  actionName: 'Добавить'
 }
 
 export default React.memo(List);
