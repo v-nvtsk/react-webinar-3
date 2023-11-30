@@ -21,7 +21,7 @@ function Item(props) {
         <div className='Item-count'>{props.item.count} шт</div>
       }
       <div className='Item-actions'>
-        <button onClick={callbacks.onAction}>
+        <button className="Item-btn" onClick={callbacks.onAction}>
           {props.actionType === 'add' && 'Добавить'}
           {props.actionType === 'delete' && 'Удалить'}
         </button>
