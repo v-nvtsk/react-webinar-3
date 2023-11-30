@@ -5,6 +5,7 @@ import Head from "./components/head";
 import PageLayout from "./components/page-layout";
 import Cart from './components/cart';
 import './app.css';
+import Modal from './components/modal';
 
 /**
  * Приложение
@@ -43,7 +44,9 @@ function App({store}) {
         actionType='add'
         onAction={callbacks.onAddItem}
       />
-      <Cart cart={cart} isModalActive={isModalShow} onCloseButtonClick={callbacks.onCloseCart} onDeleteItem={callbacks.onDeleteItem} />
+      <Modal isModalActive={isModalShow} onCloseButtonClick={callbacks.onCloseCart}>
+        <Cart cart={cart} onCloseButtonClick={callbacks.onCloseCart} onDeleteItem={callbacks.onDeleteItem} />
+      </Modal>
     </PageLayout>
   );
 }
