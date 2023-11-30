@@ -17,7 +17,7 @@ function Controls({ onShowCart, cartTotal }) {
         </span>
       </div>
       <div className="Controls-actions">
-        <button className='Controls-actions-btn' disabled={!cartTotal.itemsCount} onClick={() => onShowCart()}>Перейти</button>
+        <button className='Controls-actions-btn' onClick={() => onShowCart()}>Перейти</button>
       </div>
     </div>
   )
