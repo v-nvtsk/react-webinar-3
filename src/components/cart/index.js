@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from '../head';
 import List from '../list'
+import PropTypes from 'prop-types';
 import './style.css';
 import { formatMoney } from '../../utils';
 
@@ -24,3 +25,27 @@ export default function Cart({ cart, onCloseButtonClick, onDeleteItem }) {
     </div>
   )
 }
+Cart.propTypes = {
+  cart: PropTypes.shape({
+    list: PropTypes.object,
+    total: PropTypes.shape({
+      itemsCount: PropTypes.number,
+      totalCost: PropTypes.number
+    })
+  }),
+  onCloseButtonClick: PropTypes.func,
+  onDeleteItem: PropTypes.func
+};
+
+Cart.defaultProps = {
+  cart: {
+    list: {},
+    total: {
+      itemsCount: 0,
+      totalCost: 0
+    }
+  },
+  onCloseButtonClick: () => { },
+  onDeleteItem: () => { }
+}
+
