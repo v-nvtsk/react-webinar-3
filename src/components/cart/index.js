@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Head from '../head';
 import List from '../list'
 import './style.css';
