@@ -15,17 +15,17 @@
   padding-right: 120px;
   display: flex;
   justify-content: flex-end;
-}
-
-.Cart-total {
-  margin-left: auto;
-  text-align: right;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
+  text-align: right;
+}
+
+.Cart-total-text {
+  margin-left: auto;
 }
 
 .Cart-total-value {
-  margin-left: 53px;
+  padding-left: 20px;
+  min-width: 100px;
 }
