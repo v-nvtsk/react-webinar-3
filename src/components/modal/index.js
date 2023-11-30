@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './style.css';
+import PropTypes from "prop-types";
 
 export default function Modal(props) {
   const { children, isModalActive, onCloseButtonClick } = props;
@@ -33,3 +34,8 @@ export default function Modal(props) {
   )
 }
 
+Modal.propTypes = {
+  children: PropTypes.node.isRequired,
+  isModalActive: PropTypes.bool.isRequired,
+  onCloseButtonClick: PropTypes.func.isRequired
+}
