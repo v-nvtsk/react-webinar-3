@@ -6,7 +6,7 @@ import './style.css';
 import { formatMoney } from '../../utils';
 
 
-export default function Cart({ cart, onCloseButtonClick, onDeleteItem }) {
+function Cart({ cart, onCloseButtonClick, onDeleteItem }) {
 
   return (
     <div className='Cart'>
@@ -49,3 +49,4 @@ Cart.defaultProps = {
   onDeleteItem: () => { }
 }
 
+export default React.memo(Cart)
