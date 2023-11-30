@@ -15,12 +15,8 @@ export default function Cart({ cart, onCloseButtonClick, onDeleteItem }) {
         <List list={Object.values(cart.list)} actionType='delete' onAction={onDeleteItem} />
       </div>
       <div className="Cart-footer">
-        <p className="Cart-total">
-          Итого
-          <span className="Cart-total-value">
-            {formatMoney(cart.total.totalCost)}
-          </span>
-        </p>
+        <p className="Cart-total-text">Итого</p>
+        <p className="Cart-total-value">{formatMoney(cart.total.totalCost)}</p>
       </div>
     </div>
   )
