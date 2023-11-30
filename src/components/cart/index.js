@@ -1,5 +1,5 @@
 import React from 'react'
-import Head from '../head';
+import CartHead from './cart-head';
 import List from '../list'
 import PropTypes from 'prop-types';
 import './style.css';
@@ -10,7 +10,7 @@ function Cart({ cart, onCloseButtonClick, onDeleteItem }) {
 
   return (
     <div className='Cart'>
-      <Head title='Корзина' hasActiveButton={true} onButtonClick={onCloseButtonClick} />
+      <CartHead title='Корзина' onButtonClick={onCloseButtonClick} />
       <div className="Cart-body">
         {
           cart.total.itemsCount > 0 ?
