@@ -24,8 +24,7 @@ List.propTypes = {
 };
 
 List.defaultProps = {
-  onAction: () => {
-  },
+  onAction: () => { },
   actionName: 'Добавить'
 }
 
