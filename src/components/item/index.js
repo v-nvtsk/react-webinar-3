@@ -36,7 +36,7 @@ Item.propTypes = {
     price: PropTypes.number,
     count: PropTypes.number
   }).isRequired,
-  actionName: PropTypes.oneOf(['Добавить', 'Удалить']),
+  actionName: PropTypes.oneOf(['Добавить', 'Удалить']).isRequired,
   onAction: PropTypes.func
 };
 
