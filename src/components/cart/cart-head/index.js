@@ -7,7 +7,7 @@ function CartHead({ title, onButtonClick }) {
     <div className='Head'>
       <h2 className='Head-title'>{title}</h2>
       <div className="Head-actions">
-        <button className="Head-actions-btn" onClick={onButtonClick}>Закрыть</button>
+        <button className="actions-btn" onClick={onButtonClick}>Закрыть</button>
       </div>
     </div>
   )

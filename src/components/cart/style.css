@@ -22,16 +22,16 @@
   text-align: right;
 }
 
-.Cart-total-text {
+.Cart .total-text {
   margin-left: auto;
 }
 
-.Cart-total-value {
+.Cart .total-value {
   padding-left: 20px;
   min-width: 100px;
 }
 
-.Cart-is-empty {
+.Cart-isEmpty {
   margin: 0;
   padding: 0;
   display: flex;

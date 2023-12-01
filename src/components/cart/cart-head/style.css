@@ -12,7 +12,7 @@
   margin: 0;
 }
 
-.Head-actions-btn {
+.Head .actions-btn {
   width: 76px;
   height: 21px;
   flex-shrink: 0;

@@ -14,7 +14,7 @@
   margin-left: 15px;
 }
 
-.Controls-actions-btn {
+.Controls .actions-btn {
   width: 80px;
   height: 21px;
   flex-shrink: 0;

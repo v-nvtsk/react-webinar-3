@@ -15,12 +15,12 @@ function Cart({ cart, onCloseButtonClick, onDeleteItem }) {
         {
           cart.total.itemsCount > 0 ?
             <List list={Object.values(cart.list)} actionName='Удалить' onAction={onDeleteItem} /> :
-            <div className="Cart-is-empty">Пусто</div>
+            <div className="Cart-isEmpty">Пусто</div>
         }
       </div>
-      <div className="Cart-footer">
-        <p className="Cart-total-text">Итого</p>
-        <p className="Cart-total-value">{formatMoney(cart.total.totalCost)}</p>
+      <div className="Cart-footer total">
+        <p className="total-text">Итого</p>
+        <p className="total-value">{formatMoney(cart.total.totalCost)}</p>
       </div>
     </div>
   )
