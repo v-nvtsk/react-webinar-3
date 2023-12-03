@@ -50,8 +50,15 @@ class Store {
    * Добавление новой записи в корзину
    */
   addItem(item) {
-    const cartList = { ...this.state.cart.list };
-    cartList[item.code] !== undefined ? cartList[item.code].count += 1 : cartList[item.code] = { ...item, count: 1 };
+    let cartList = this.state.cart.list;
+    let cartItem;
+    if (cartList[item.code] === undefined) {
+      cartItem = { ...item, count: 0 }
+    } else {
+      cartItem = { ...cartList[item.code] };
+    };
+    cartItem.count += 1
+    cartList = { ...cartList, [item.code]: cartItem }
     let cartTotal = { ...this.state.cart.total };
     cartTotal.itemsCount = Object.keys(cartList).length;
     cartTotal.totalCost += item.price;
