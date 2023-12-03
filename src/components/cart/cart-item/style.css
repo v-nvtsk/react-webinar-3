@@ -1,0 +1,37 @@
+.Item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  transition: background-color 1s;
+}
+
+.Item_selected {
+  background: #75aaf1;
+  color: #fff;
+}
+
+.Item-code {
+  padding: 20px 10px 20px 20px;
+}
+
+.Item-price {
+  margin-left: auto;
+  text-align: right;
+}
+
+.Item-count {
+  /* padding-right: 34px; */
+  min-width: 100px;
+  text-align: right;
+  padding: 0;
+}
+
+.Item-actions {
+  text-align: center;
+  width: 120px;
+}
+
+.Item-btn {
+  width: 76px;
+  height: 21px;
+}

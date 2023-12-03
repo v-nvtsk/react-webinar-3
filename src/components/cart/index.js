@@ -4,9 +4,12 @@ import List from '../list'
 import PropTypes from 'prop-types';
 import './style.css';
 import { formatMoney } from '../../utils';
+import CartItem from './cart-item';
 
 
 function Cart({ cart, onCloseButtonClick, onDeleteItem }) {
+  const cartList = Object.values(cart.list)
+  const renderCartItem = (item) => { return (<CartItem key={item.code} item={item} onAction={onDeleteItem} />) }
 
   return (
     <div className='Cart'>
@@ -14,7 +17,7 @@ function Cart({ cart, onCloseButtonClick, onDeleteItem }) {
       <div className="Cart-body">
         {
           cart.total.itemsCount > 0 ?
-            <List list={Object.values(cart.list)} actionName='Удалить' onAction={onDeleteItem} /> :
+            <List items={cartList} renderItem={renderCartItem} /> :
             <div className="Cart-isEmpty">Пусто</div>
         }
       </div>

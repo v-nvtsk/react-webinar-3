@@ -6,6 +6,7 @@ import PageLayout from "./components/page-layout";
 import Cart from './components/cart';
 import './app.css';
 import Modal from './components/modal';
+import Item from './components/item';
 
 /**
  * Приложение
@@ -36,11 +37,13 @@ function App({store}) {
     }
   }
 
+  const renderProductsItem = (item) => { return (<Item key={item.code} item={item} onAddItem={callbacks.onAddItem} />) }
+
   return (
     <PageLayout>
       <Head title='Магазин' />
       <Controls onShowCart={callbacks.onShowCart} cartTotal={cartTotal} />
-      <List list={list} onAction={callbacks.onAddItem} />
+      <List items={list} renderItem={renderProductsItem} />
       <Modal isModalActive={isModalShow} onCloseButtonClick={callbacks.onCloseCart}>
         <Cart cart={cart} onCloseButtonClick={callbacks.onCloseCart} onDeleteItem={callbacks.onDeleteItem} />
       </Modal>
