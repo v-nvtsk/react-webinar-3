@@ -31,13 +31,3 @@
   min-width: 100px;
 }
 
-.Cart-isEmpty {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 58px;
-  border-top: 1px dashed #ccc;
-  border-bottom: 1px dashed #ccc;
-}

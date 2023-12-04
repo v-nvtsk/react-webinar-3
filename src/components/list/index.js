@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import './style.css';
 
 function List({ items, renderItem }) {
-  return (
-    <div className='List'>
-      {items.map(item => renderItem(item))}
-    </div>
-  )
+  if (items.length === 0) {
+    return (<div className="List-isEmpty">Пусто</div>)
+  } else {
+    return (<div className='List'>{items.map(item => renderItem(item))}</div>
+    )
+  }
 }
 
 List.propTypes = {
