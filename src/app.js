@@ -42,16 +42,16 @@ function App({store}) {
 
   const renderProductsItem = (item) => { return (<Item key={item.code} item={item} onAddItem={callbacks.onAddItem} />) }
 
-  return (
+  return (<>
     <PageLayout>
       <Head title='Магазин' />
       <Controls onShowCart={callbacks.onShowCart} cartTotal={cartTotal} />
       <List items={list} renderItem={renderProductsItem} />
-      <Modal isModalActive={isModalShow} onCloseButtonClick={callbacks.onCloseCart}>
-      <Cart cartList={cartList} cartTotal={cartTotal} onItemFetch={callbacks.onItemFetch} onCloseButtonClick={callbacks.onCloseCart} onDeleteItem={callbacks.onDeleteItem} />
-      </Modal>
     </PageLayout>
-  );
+    <Modal isModalActive={isModalShow} onCloseButtonClick={callbacks.onCloseCart}>
+      <Cart cartList={cartList} cartTotal={cartTotal} onItemFetch={callbacks.onItemFetch} onCloseButtonClick={callbacks.onCloseCart} onDeleteItem={callbacks.onDeleteItem} />
+    </Modal>
+  </>);
 }
 
 export default App;
