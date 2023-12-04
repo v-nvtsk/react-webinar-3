@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { formatMoney } from "../../utils";
 import './style.css';
@@ -8,7 +8,7 @@ function Item(props) {
   const callbacks = {
     onAdd: (e) => {
       e.stopPropagation();
-      props.onAddItem(props.item);
+      props.onAddItem(props.item.code);
     }
   }
 

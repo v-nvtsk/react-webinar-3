@@ -5,13 +5,12 @@
 class Store {
   constructor(initState = {}) {
     this.state = initState;
-    this.state.cart = {
-      list: {},
-      total: {
-        itemsCount: 0,
-        totalCost: 0
-      }
+    this.state.cartList = {};
+    this.state.cartTotal = {
+      itemsCount: 0,
+      totalCost: 0
     };
+
     this.listeners = []; // Слушатели изменений состояния
   }
 
@@ -49,50 +48,43 @@ class Store {
   /**
    * Добавление новой записи в корзину
    */
-  addItem(item) {
-    let cartList = this.state.cart.list;
-    let cartItem;
-    if (cartList[item.code] === undefined) {
-      cartItem = { ...item, count: 0 }
-    } else {
-      cartItem = { ...cartList[item.code] };
-    };
-    cartItem.count += 1
-    cartList = { ...cartList, [item.code]: cartItem }
-    let cartTotal = { ...this.state.cart.total };
-    cartTotal.itemsCount = Object.keys(cartList).length;
-    cartTotal.totalCost += item.price;
-
+  addItem(code) {
+    const cartListCopy = { ...this.state.cartList };
+    cartListCopy[code] = cartListCopy[code] === undefined ? 1 : cartListCopy[code] += 1;
+    const cartTotalCopy = { ...this.state.cartTotal };
+    cartTotalCopy.itemsCount = Object.keys(cartListCopy).length;
+    cartTotalCopy.totalCost += this.itemFetch(code).price;
     this.setState(
       {
         ...this.state,
-        cart: {
-          list: cartList,
-          total: cartTotal
-        }
-      })
+        cartList: { ...cartListCopy },
+        cartTotal: { ...cartTotalCopy }
+      }
+    )
   };
 
   /**
    * Удаление записи по коду
    * @param code
    */
-  deleteItem({ code }) {
-    const cartList = { ...this.state.cart.list };
-    const cartTotal = { ...this.state.cart.total };
-    cartTotal.itemsCount -= 1;
-    cartTotal.totalCost -= cartList[code].count * cartList[code].price;
-    delete cartList[code]
+  deleteItem(code) {
+    const productItem = this.itemFetch(code)
+    const cartListCopy = { ...this.state.cartList };
+    const cartTotalCopy = { ...this.state.cartTotal };
+    cartTotalCopy.itemsCount -= 1;
+    cartTotalCopy.totalCost -= productItem.price * cartListCopy[code];
+    delete cartListCopy[code];
 
     this.setState({
       ...this.state,
-      // Новый список, в котором не будет удаляемой записи
-      cart: {
-        list: cartList,
-        total: cartTotal
-      }
+      cartList: { ...cartListCopy },
+      cartTotal: { ...cartTotalCopy }
     })
   };
+  itemFetch(code) {
+    const productItem = this.state.list.filter(item => item.code === Number(code))[0];
+    return productItem;
+  }
 }
 
 export default Store;

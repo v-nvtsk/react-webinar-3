@@ -7,23 +7,28 @@ import { formatMoney } from '../../utils';
 import CartItem from './cart-item';
 
 
-function Cart({ cart, onCloseButtonClick, onDeleteItem }) {
-  const cartList = Object.values(cart.list)
-  const renderCartItem = (item) => { return (<CartItem key={item.code} item={item} onAction={onDeleteItem} />) }
+function Cart({ cartList, cartTotal, onCloseButtonClick, onDeleteItem, onItemFetch }) {
+
+  const renderCartItem = (code) => {
+    const item = onItemFetch(code);
+    const cartItemData = {
+      code: Number(code),
+      title: item.title,
+      count: cartList[code],
+      price: item.price
+    }
+    return (<CartItem key={code} item={cartItemData} onAction={onDeleteItem} />)
+  }
 
   return (
     <div className='Cart'>
       <CartHead title='Корзина' onButtonClick={onCloseButtonClick} />
       <div className="Cart-body">
-        {
-          cart.total.itemsCount > 0 ?
-            <List items={cartList} renderItem={renderCartItem} /> :
-            <div className="Cart-isEmpty">Пусто</div>
-        }
+        {<List items={Object.keys(cartList)} renderItem={renderCartItem} />}
       </div>
       <div className="Cart-footer total">
         <p className="total-text">Итого</p>
-        <p className="total-value">{formatMoney(cart.total.totalCost)}</p>
+        <p className="total-value">{formatMoney(cartTotal.totalCost)}</p>
       </div>
     </div>
   )

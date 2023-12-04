@@ -18,22 +18,25 @@ function App({store}) {
   const [isModalShow, setModalShow] = useState(false);
 
   const list = store.getState().list;
-  const cart = store.getState().cart;
-  const cartTotal = cart.total;
+  const cartList = store.getState().cartList;
+  const cartTotal = store.getState().cartTotal;
 
   const callbacks = {
     onDeleteItem: useCallback((code) => {
       store.deleteItem(code);
     }, [store]),
 
-    onAddItem: useCallback((item) => {
-      store.addItem(item);
+    onAddItem: useCallback((code) => {
+      store.addItem(code);
     }, [store]),
     onShowCart: () => {
       setModalShow(true);
     },
     onCloseCart: () => {
       setModalShow(false);
+    },
+    onItemFetch: (code) => {
+      return store.itemFetch(code);
     }
   }
 
@@ -45,7 +48,7 @@ function App({store}) {
       <Controls onShowCart={callbacks.onShowCart} cartTotal={cartTotal} />
       <List items={list} renderItem={renderProductsItem} />
       <Modal isModalActive={isModalShow} onCloseButtonClick={callbacks.onCloseCart}>
-        <Cart cart={cart} onCloseButtonClick={callbacks.onCloseCart} onDeleteItem={callbacks.onDeleteItem} />
+      <Cart cartList={cartList} cartTotal={cartTotal} onItemFetch={callbacks.onItemFetch} onCloseButtonClick={callbacks.onCloseCart} onDeleteItem={callbacks.onDeleteItem} />
       </Modal>
     </PageLayout>
   );
