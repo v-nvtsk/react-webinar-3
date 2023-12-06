@@ -1,9 +1,10 @@
 import {useCallback, useContext, useEffect, useState} from 'react';
 import Main from "./main";
-import Basket from "./basket";
+// import Basket from "./basket";
 import useStore from "../store/use-store";
 import useSelector from "../store/use-selector";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Product from "./product";
 
 /**
  * Приложение
@@ -11,11 +12,19 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
  */
 function App() {
 
-  const activeModal = useSelector(state => state.modals.name);
+  // const activeModal = useSelector(state => state.modals.name);
 
   const store = useStore();
 
   const router = createBrowserRouter([
+    {
+      path: "/products/:id",
+      element: <Product />,
+      loader: async ({ params }) => {
+        const data = await store.actions.catalog.loadItemData(params.id);
+        return { data }
+      }
+    },
     {
       path: "/page/:page",
       element: <Main />,
@@ -39,7 +48,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
-      {activeModal === 'basket' && <Basket/>}
+        {/* {activeModal === 'basket' && <Basket />} */}
     </>
   );
 }

@@ -23,6 +23,25 @@ class Catalog extends StoreModule {
       count: json.result.count
     }, 'Загружены товары из АПИ');
   }
+
+  // запрос по API отдельного товара
+  async loadItemData(id) {
+    if (!id) return {};
+    const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
+
+    const json = await response.json();
+
+    const result = {
+      id,
+      description: json.result.description,
+      title: json.result.title,
+      country: json.result.madeIn.title,
+      category: json.result.category.title,
+      year: json.result.edition,
+      price: json.result.price,
+    }
+    return result;
+  }
 }
 
 export default Catalog;
