@@ -4,7 +4,6 @@
   justify-content: flex-start;
   transition: background-color 1s;
   padding-left: 10px;
-  cursor: pointer;
 }
 
 .ItemBasket-code {
@@ -14,6 +13,7 @@
 .ItemBasket-title {
   width: 100%;
   padding: 20px 10px;
+  cursor: pointer;
 }
 
 .ItemBasket-right {

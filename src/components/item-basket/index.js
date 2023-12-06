@@ -11,8 +11,7 @@ function ItemBasket(props) {
 
   const callbacks = {
     onClick: (e) => {
-      props.onClick()
-      // navigate(`/products/${props.item._id}`);
+      props.onClick(props.item._id)
     },
     onRemove: (e) => {
       e.stopPropagation();
@@ -21,9 +20,9 @@ function ItemBasket(props) {
   };
 
   return (
-    <div className={cn()} onClick={callbacks.onClick}>
+    <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <div className={cn('title')}>{props.item.title}</div>
+      <div className={cn('title')} onClick={callbacks.onClick}>{props.item.title}</div>
       <div className={cn('right')}>
         <div className={cn('cell')}>{numberFormat(props.item.price)} ₽</div>
         <div className={cn('cell')}>{numberFormat(props.item.amount || 0)} шт</div>

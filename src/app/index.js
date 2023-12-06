@@ -1,8 +1,5 @@
-import {useCallback, useContext, useEffect, useState} from 'react';
 import Main from "./main";
-// import Basket from "./basket";
 import useStore from "../store/use-store";
-import useSelector from "../store/use-selector";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Product from "./product";
 
@@ -18,11 +15,14 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: "/products/:id",
-      element: <Product />,
+      path: "/products/:_id",
+      element: <Product title="Каталог" />,
       loader: async ({ params }) => {
-        const data = await store.actions.catalog.loadItemData(params.id);
-        return { data }
+        const data = await store.actions.catalog.loadItemData(params._id);
+        return {
+          data,
+          store
+        }
       }
     },
     {
@@ -30,16 +30,18 @@ function App() {
       element: <Main />,
       loader: ({ params }) => {
         return {
-          page: params.page || 1
+          page: params.page || 1,
+          store
         }
       }
     },
     {
       path: "/",
-      Component: Main,
-      loader: ({ params }) => {
+      element: <Main />,
+      loader: () => {
         return {
-          page: 1
+          page: 1,
+          store
         }
       }
     },

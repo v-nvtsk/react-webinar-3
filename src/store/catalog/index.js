@@ -10,7 +10,8 @@ class Catalog extends StoreModule {
 
   initState() {
     return {
-      list: []
+      list: [],
+      count: 0
     }
   }
 
@@ -25,14 +26,14 @@ class Catalog extends StoreModule {
   }
 
   // запрос по API отдельного товара
-  async loadItemData(id) {
-    if (!id) return {};
-    const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
+  async loadItemData(_id) {
+    if (!_id) return {};
+    const response = await fetch(`/api/v1/articles/${_id}?fields=*,madeIn(title,code),category(title)`);
 
     const json = await response.json();
 
     const result = {
-      id,
+      _id,
       description: json.result.description,
       title: json.result.title,
       country: json.result.madeIn.title,
