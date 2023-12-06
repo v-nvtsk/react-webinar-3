@@ -27,13 +27,15 @@ function Product(params) {
 
 
   return (
+    <>
     <PageLayout>
       <Head title={data.title} />
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
         sum={select.sum} />
       <ProductData data={data} onAddItem={callbacks.addToBasket} />
     </PageLayout>
-
+      {activeModal === 'basket' && <Basket navigate={callbacks.navigate} />}
+    </>
   );
 }
 

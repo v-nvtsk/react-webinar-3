@@ -51,7 +51,7 @@ function Main() {
         <List list={select.list} renderItem={renders.item} />
         <Pagination totalPages={Math.ceil(Number(select.count) / 10)} currentPage={page} />
       </PageLayout>
-      {activeModal === 'basket' && <Basket />}
+      {activeModal === 'basket' && <Basket navigate={callbacks.navigate} />}
     </>
   );
 }
