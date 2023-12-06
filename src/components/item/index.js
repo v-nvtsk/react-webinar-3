@@ -1,5 +1,6 @@
 import {memo, useState} from "react";
 import PropTypes from "prop-types";
+import { cn as bem } from '@bem-react/classname';
 import { useNavigate } from "react-router-dom";
 import './style.css';
 
