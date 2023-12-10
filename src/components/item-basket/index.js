@@ -1,7 +1,7 @@
-import {memo, useCallback} from 'react';
+import { memo, useCallback } from 'react';
 import propTypes from 'prop-types';
-import {numberFormat} from "../../utils";
-import {cn as bem} from "@bem-react/classname";
+import { numberFormat } from "../../utils";
+import { cn as bem } from "@bem-react/classname";
 import PropTypes from "prop-types";
 import './style.css';
 
@@ -11,7 +11,8 @@ function ItemBasket(props) {
 
   const callbacks = {
     onClick: (e) => {
-      props.onClick(props.item._id)
+      e.preventDefault();
+      props.onClick(props.href)
     },
     onRemove: (e) => {
       e.stopPropagation();
@@ -22,7 +23,7 @@ function ItemBasket(props) {
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <div className={cn('title')} onClick={callbacks.onClick}>{props.item.title}</div>
+      <a href={props.href} className={cn('title')} onClick={callbacks.onClick}>{props.item.title}</a>
       <div className={cn('right')}>
         <div className={cn('cell')}>{numberFormat(props.item.price)} ₽</div>
         <div className={cn('cell')}>{numberFormat(props.item.amount || 0)} шт</div>
@@ -39,13 +40,14 @@ ItemBasket.propTypes = {
     _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string,
     price: PropTypes.number,
-    amount: PropTypes.number
+    amount: PropTypes.number,
   }).isRequired,
+  href: PropTypes.string,
   onRemove: propTypes.func,
 }
 
 ItemBasket.defaultProps = {
-  onRemove: () => {},
+  onRemove: () => { },
 }
 
 export default memo(ItemBasket);

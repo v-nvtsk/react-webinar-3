@@ -1,12 +1,11 @@
 import { memo, useCallback, useEffect, useState } from 'react';
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
-import BasketTool from "../../components/basket-tool";
-import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import ProductData from '../../components/product-data';
-import {useLoaderData, useNavigate} from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import Basket from '../basket';
+import MainMenu from '../../components/main-menu';
 
 function Product() {
   const navigate = useNavigate();
@@ -22,8 +21,9 @@ function Product() {
     addToBasket: useCallback(() => store.actions.basket.addToBasket(data._id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
-    navigate: useCallback((_id) => {
-      navigate(`/products/${_id}`);
+    navigate: useCallback((url) => {
+      console.log('url: ', url);
+      navigate(url);
     }, []),
   }
 
@@ -37,8 +37,7 @@ function Product() {
     <>
       <PageLayout>
         <Head title={data.title} />
-        <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-          sum={select.sum} />
+        <MainMenu onNavigate={callbacks.navigate} onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} />
         <ProductData data={data} onAddItem={callbacks.addToBasket} />
       </PageLayout>
       {activeModal === 'basket' && <Basket navigate={callbacks.navigate} />}

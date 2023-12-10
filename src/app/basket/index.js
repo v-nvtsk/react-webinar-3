@@ -21,22 +21,22 @@ function Basket(props) {
     // Закрытие любой модалки
     closeModal: useCallback(() => store.actions.modals.close(), [store]),
     // Переход из корзины в описание продукта
-    navigate: useCallback((_id) => {
+    navigate: useCallback((url) => {
       store.actions.modals.close()
-      props.navigate(_id)
+      props.navigate(url)
     }, [store]),
   }
 
   const renders = {
     itemBasket: useCallback((item) => {
-      return (<ItemBasket item={item} onRemove={callbacks.removeFromBasket} onClick={callbacks.navigate} />)
+      return (<ItemBasket href={`/products/${item._id}`} item={item} onRemove={callbacks.removeFromBasket} onClick={callbacks.navigate} />)
     }, [callbacks.removeFromBasket]),
   };
 
   return (
     <ModalLayout title='Корзина' onClose={callbacks.closeModal}>
-      <List list={select.list} renderItem={renders.itemBasket}/>
-      <BasketTotal sum={select.sum}/>
+      <List list={select.list} renderItem={renders.itemBasket} />
+      <BasketTotal sum={select.sum} />
     </ModalLayout>
   );
 }

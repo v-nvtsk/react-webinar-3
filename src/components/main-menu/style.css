@@ -1,0 +1,15 @@
+.MainMenu{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.BasketTool-link {
+  margin-right: auto;
+
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+
+  color: #0087e9;
+}

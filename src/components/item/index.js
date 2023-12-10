@@ -1,8 +1,7 @@
-import {memo, useState} from "react";
+import { memo, useState } from "react";
 import PropTypes from "prop-types";
 import { cn as bem } from '@bem-react/classname';
 import { numberFormat } from "../../utils";
-import { useNavigate } from "react-router-dom";
 import './style.css';
 
 function Item(props) {
@@ -14,15 +13,13 @@ function Item(props) {
       props.onAdd(props.item._id)
     },
     onClick: (e) => {
-      props.onClick(props.item._id)
+      e.preventDefault();
+      props.onClick(props.href)
     }
   }
   return (
     <div className={cn()}>
-      {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <div className={cn('title')} onClick={callbacks.onClick}>
-        {props.item.title}
-      </div>
+      <a className={cn('title')} href={props.href} onClick={callbacks.onClick}> {props.item.title}</a>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
         <button onClick={callbacks.onAdd}>Добавить</button>
@@ -35,13 +32,14 @@ Item.propTypes = {
   item: PropTypes.shape({
     _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string,
-    price: PropTypes.number
+    price: PropTypes.number,
   }).isRequired,
+  href: PropTypes.string,
   onAdd: PropTypes.func,
 };
 
 Item.defaultProps = {
-  onAdd: () => {},
+  onAdd: () => { },
 }
 
 export default memo(Item);

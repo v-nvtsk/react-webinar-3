@@ -55,20 +55,16 @@ export function generatePagesList(curr, max) {
     if (curr < 3) {
       pages = [1, 2, 3, '...', max];
       currPageIndex = curr
-    }
-    if (curr === 3) {
+    } else if (curr === 3) {
       pages = [1, 2, 3, 4, '...', max];
       currPageIndex = 3
-    }
-    if (curr > 3 && curr < max - 2) {
+    } else if (curr < max - 2) {
       pages = [1, '...', curr - 1, curr, curr + 1, '...', max];
       currPageIndex = 4
-    }
-    if (curr === max - 2) {
+    } else if (curr === max - 2) {
       pages = [1, '...', curr - 1, curr, curr + 1, max];
       currPageIndex = 4
-    }
-    if (curr > max - 2) {
+    } else if (curr > max - 2) {
       pages = [1, '...', max - 2, max - 1, max];
       currPageIndex = 5 - (max - curr)
     }

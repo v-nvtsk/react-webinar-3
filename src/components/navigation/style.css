@@ -1,0 +1,22 @@
+.Navigation-list{
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 20px;
+}
+
+.Navigation-link {
+
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+
+  color: #0087e9;
+}
+.Navigation-link:link {
+  text-decoration: none;
+}
+
+.Navigation-link:hover {
+  text-decoration: underline;
+}
