@@ -5,21 +5,23 @@ import Head from "../../components/head";
 import List from "../../components/list";
 import useSelector from "../../store/use-selector";
 import Pagination from '../../components/pagination';
-import { useLoaderData } from 'react-router-dom';
 import Basket from "../basket";
-import { useNavigate } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import MainMenu from '../../components/main-menu';
+import useStore from '../../store/use-store';
 
 function Main() {
   const navigate = useNavigate();
   const activeModal = useSelector(state => state.modals.name);
 
-  const loaderData = useLoaderData();
-  const page = Number(loaderData.page) || 1;
-  const store = loaderData.store;
+  const params = useParams()
+  const page = Number(params.page) || 1;
+
+  const store = useStore();
 
   useEffect(() => {
     store.actions.catalog.load(page);
+    document.title = `Simple SPA`;
   }, [page]);
 
   const select = useSelector(state => ({
@@ -51,7 +53,7 @@ function Main() {
         <Head title='Магазин' />
         <MainMenu onNavigate={callbacks.navigate} onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} />
         <List list={select.list} renderItem={renders.item} />
-        <Pagination totalPages={Math.ceil(Number(select.count) / 10)} currentPage={page} />
+        <Pagination totalPages={Math.ceil(Number(select.count) / 10)} currentPage={page} navigate={callbacks.navigate} />
       </PageLayout>
       {activeModal === 'basket' && <Basket navigate={callbacks.navigate} />}
     </>

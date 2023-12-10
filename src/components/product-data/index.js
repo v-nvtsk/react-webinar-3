@@ -2,6 +2,7 @@ import React from 'react'
 import { cn as bem, cn } from '@bem-react/classname';
 import propTypes from "prop-types";
 import './index.css';
+import { numberFormat } from '../../utils';
 
 export default function ProductData({ data, onAddItem }) {
   const cn = bem('product-data');
@@ -18,7 +19,7 @@ export default function ProductData({ data, onAddItem }) {
         Год выпуска: <span className={cn('year-value')}>{data.year}</span>
       </p>
       <p className={cn('price')}>
-        Цена: <span className={cn('price-value')}>{data.price}</span>
+        Цена: <span className={cn('price-value')}>{numberFormat(data.price)} ₽</span>
       </p>
       <button className={cn('button')} onClick={onAddItem}>Добавить</button>
     </div >
