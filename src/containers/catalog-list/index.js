@@ -19,6 +19,9 @@ function CatalogList() {
     limit: state.catalog.params.limit,
     count: state.catalog.count,
     waiting: state.catalog.waiting,
+    sort: state.catalog.params.sort,
+    query: state.catalog.params.query,
+    category: state.catalog.params.category
   }));
 
   const callbacks = {
@@ -32,7 +35,8 @@ function CatalogList() {
         page,
         limit: select.limit,
         sort: select.sort,
-        query: select.query
+        query: select.query,
+        'search[category]': select.category
       })}`;
     }, [select.limit, select.sort, select.query])
   }
