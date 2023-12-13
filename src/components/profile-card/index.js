@@ -5,19 +5,18 @@ import './style.css';
 
 function ProfileCard(props) {
   const user = props.user;
-  console.log('user: ', user);
-  console.log('props in ProfileCard: ', props);
+  const t = props.t;
   const cn = bem('ProfileCard')
   return (
     <div className={cn()}>
-      <h2 className={cn('title')}>Профиль</h2>
+      <h2 className={cn('title')}>{t('profile.title')}</h2>
       <div className={cn('data')}>
         <div className={cn('name')}>
-          <span className={cn('name-title')}>Имя: </span>
+          <span className={cn('name-title')}>{t('profile.name')}: </span>
           <span className={cn('name-value')}>{user.profile?.name}</span>
         </div>
         <div className={cn('phone')}>
-          <span className={cn('phone-title')}>Телефон: </span>
+          <span className={cn('phone-title')}>{t('profile.phone')}: </span>
           <span className={cn('phone-value')}>{user.profile?.phone}</span>
         </div>
         <div className={cn('email')}>

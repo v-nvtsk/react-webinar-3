@@ -45,12 +45,12 @@ function Login() {
 
   return (
     <PageLayout>
-      <User username={select.username} onLoginNavigate={callbacks.onLoginNavigate} onLogout={callbacks.onLogout} />
+      <User username={select.username} onLoginNavigate={callbacks.onLoginNavigate} onLogout={callbacks.onLogout} t={t} />
       <Head title={t('title')}>
         <LocaleSelect />
       </Head>
       <Navigation />
-      <LoginForm onLogin={callbacks.onLogin} error={select.error} />
+      <LoginForm onLogin={callbacks.onLogin} error={select.error} t={t} />
     </PageLayout>
   );
 }

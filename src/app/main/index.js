@@ -42,7 +42,7 @@ function Main() {
 
   return (
     <PageLayout>
-      <User username={select.username} onLoginNavigate={callbacks.onLoginNavigate} onLogout={callbacks.onLogout} />
+      <User username={select.username} onLoginNavigate={callbacks.onLoginNavigate} onLogout={callbacks.onLogout} t={t} />
       <Head title={t('title')}>
         <LocaleSelect/>
       </Head>

@@ -46,12 +46,12 @@ function Profile() {
 
   return (
     <PageLayout>
-      <User username={select.username} onLogout={callbacks.onLogout} />
+      <User username={select.username} onLogout={callbacks.onLogout} t={t} />
       <Head title={t('title')}>
         <LocaleSelect />
       </Head>
       <Navigation />
-      <ProfileCard user={select.user} />
+      <ProfileCard user={select.user} t={t} />
     </PageLayout>
   );
 }
