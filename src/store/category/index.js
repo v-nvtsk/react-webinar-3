@@ -46,11 +46,7 @@ function createTree(items, parent, deepLevel = 0) {
     if (item.parent === parent) {
       item.title = '- '.repeat(deepLevel) + item.title;
       result.push(item);
-      item.children = createTree(items, item.value, deepLevel + 1);
-
-      if (!item.children.length) {
-        delete item.children;
-      }
+      result = [...result, ...createTree(items, item.value, deepLevel + 1)];
     }
   });
 
