@@ -20,7 +20,7 @@
   "profile.title": "Profile",
   "profile.name": "Name",
   "profile.phone": "Phone",
-  "login.signin": "Sign in",
+  "login.title": "Sign in",
   "login.login": "Login",
   "login.password": "Password",
   "login.button": "Signin"

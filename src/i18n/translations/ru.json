@@ -22,7 +22,7 @@
   "profile.title":"Профиль",
   "profile.name":"Имя",
   "profile.phone":"Телефон",
-  "login.signin": "Вход",
+  "login.title": "Вход",
   "login.login": "Логин",
   "login.password": "Пароль",
   "login.button": "Войти"
