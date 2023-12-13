@@ -2,14 +2,18 @@
   padding: 20px;
 }
 
+.LoginForm-title{
+  margin-bottom: 10px;
+}
+
 .LoginForm-label {
-  margin-top: 20px;
+  margin-top: 15px;
   display: block;
 }
 
 .LoginForm-input {
-  width: 203px;
-  height: 26px;
+  width: 196px;
+  height: 20px;
   font-size: 16px;
   padding: 2px;
 }
@@ -25,5 +29,5 @@
 }
 
 .LoginForm-button {
-  margin-top: 20px;
+  margin-top: 0px;
 }
