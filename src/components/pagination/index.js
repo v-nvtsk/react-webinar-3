@@ -30,7 +30,7 @@ function Pagination(props) {
   const onClickHandler = (number) => (e) => {
     if (props.onChange) {
       e.preventDefault();
-      props.onChange(number);
+      if (number) props.onChange(number);
     }
   }
 
