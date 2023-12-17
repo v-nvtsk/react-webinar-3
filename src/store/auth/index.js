@@ -108,7 +108,13 @@ class AuthState extends StoreModule {
 
   async restoreSession() {
     const token = localStorage.getItem('token');
-    if (!token) return;
+    if (!token) {
+      this.setState({
+        ...this.getState(),
+        waiting: false
+      }, 'Проверяем сессию, ставим флаг ожидания');
+      return
+    };
 
     this.setState({
       ...this.getState(),
