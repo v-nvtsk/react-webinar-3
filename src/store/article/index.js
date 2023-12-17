@@ -22,7 +22,7 @@ class ArticleState extends StoreModule {
     this.setState({
       data: {},
       waiting: true
-    });
+    }, 'Загружаем товар из АПИ, ставим флаг ожидания');
 
     try {
       const response = await fetch(`/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`);
@@ -40,7 +40,7 @@ class ArticleState extends StoreModule {
       this.setState({
         data: {},
         waiting: false
-      });
+      }, "Ошибка загрузки товара из АПИ");
     }
   }
 }

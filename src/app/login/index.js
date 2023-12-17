@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import useStore from "../../hooks/use-store";
 import useTranslate from "../../hooks/use-translate";
 import Navigation from "../../containers/navigation";
@@ -17,14 +17,11 @@ function Login() {
   const navigate = useNavigate();
   const store = useStore();
   const prevPath = new URLSearchParams(location.search).get('prevPath');
-  console.log('prevPath: ', prevPath);
-  console.log(new URLSearchParams(location.pathname).get('prevPath'));
   const select = useSelector(state => ({
     error: state.auth.error,
     token: state.auth.token,
     username: state.auth.username
   }));
-  if (select.token) navigate(prevPath || '/');
 
   const callbacks = {
     onLogin: useCallback(async (login, password) => {
@@ -39,7 +36,11 @@ function Login() {
     })
   }
 
-
+  useEffect(() => {
+    return () => {
+      store.actions.auth.resetErrorState()
+    }
+  }, [])
 
   const { t } = useTranslate();
 

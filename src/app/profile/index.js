@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect } from 'react';
+import { memo, useCallback } from 'react';
 import useStore from "../../hooks/use-store";
 import useTranslate from "../../hooks/use-translate";
 import Navigation from "../../containers/navigation";
@@ -8,35 +8,20 @@ import LocaleSelect from "../../containers/locale-select";
 import User from '../../components/user';
 import ProfileCard from '../../components/profile-card';
 import useSelector from '../../hooks/use-selector';
-import { useNavigate } from "react-router-dom";
+import Spinner from '../../components/spinner';
 
 /**
  * Главная страница - первичная загрузка каталога
  */
 function Profile() {
-
-  const navigate = useNavigate()
-
   const store = useStore();
-
   const select = useSelector(state => ({
     username: state.auth.username,
-    token: state.auth.token,
-    user: state.auth.user,
+    userdata: state.profile.data,
+    waiting: state.profile.waiting
   }));
 
-  useEffect(() => {
-    if (!select.token) {
-      navigate(`/login?prevPath=${location.pathname}`)
-    }
-    store.actions.auth.loadProfile();
-  }, [select.token])
-
-
-
   const callbacks = {
-    // Добавление в корзину
-    addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     onLogout: useCallback(() => {
       store.actions.auth.logout();
     }, [store])
@@ -51,7 +36,9 @@ function Profile() {
         <LocaleSelect />
       </Head>
       <Navigation />
-      <ProfileCard user={select.user} t={t} />
+      <Spinner active={select.waiting}>
+        <ProfileCard user={select.userdata} t={t} />
+      </Spinner>
     </PageLayout>
   );
 }

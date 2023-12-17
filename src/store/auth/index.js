@@ -6,13 +6,11 @@ import StoreModule from "../module";
 class AuthState extends StoreModule {
 
   initState() {
-    const token = localStorage.getItem('token');
-    const username = token ? localStorage.getItem('username') : '';
     return {
-      token,
-      user: {},
-      username,
-      waiting: false
+      token: null,
+      _id: null,
+      username: null,
+      waiting: true
     }
   }
 
@@ -23,12 +21,12 @@ class AuthState extends StoreModule {
    */
   async login(login, password) {
     this.setState({
-      token: null,
+      ...this.getState(),
       waiting: true
-    });
+    }, 'Начинаем аутентификацию, ставим флаг ожидания');
 
     try {
-      const response = await fetch(`/api/v1/users/sign`,
+      const response = await fetch(`/api/v1/users/sign?fields=_id%2Cprofile%28name%29`,
         {
           method: 'POST',
           body: JSON.stringify({
@@ -48,63 +46,77 @@ class AuthState extends StoreModule {
       // Токен получен
       this.setState({
         error: null,
-        ...json.result,
-        user: json.result.user,
+        token: json.result.token,
+        _id: json.result._id,
         username: json.result.user.profile.name,
         waiting: false
       }, 'Получен auth token');
-      localStorage.setItem('token', json.result.token)
-      localStorage.setItem('username', json.result.user.profile.name)
+      localStorage.setItem('token', json.result.token);
       return json.result.token;
     } catch (e) {
-      console.log('e: ', e);
-      // Ошибка при загрузке
       this.setState({
         error: e.message,
+        token: null,
+        _id: null,
+        username: null,
         waiting: false
-      });
+      }, "Ошибка аутентификации");
     }
   }
   async logout() {
+    this.setState({
+      ...this.getState(),
+      waiting: true
+    }, 'Удаление токена, ставим флаг ожидания');
+
     try {
       const response = await fetch(`/api/v1/users/sign`,
         {
           method: 'DELETE',
-          body: JSON.stringify({
-            "remember": true
-          }), headers: {
+          body: '',
+          headers: {
             'X-Token': this.getState().token,
             'Content-type': 'application/json; charset=UTF-8',
           },
         });
       const json = await response.json();
+      if (response.status !== 200) {
+        throw new Error(json.error.data.issues[0].message);
+      }
 
       // Удаляем все данные
       this.setState({
+        error: null,
         token: null,
+        _id: null,
         username: null,
-        profile: null,
         waiting: false
       }, 'SignOut');
       localStorage.removeItem('token');
-      localStorage.removeItem('username');
 
     } catch (e) {
-      // Ошибка при загрузке
       // @todo В стейт можно положить информацию об ошибке
       this.setState({
+        error: e.message,
         token: null,
+        _id: null,
+        username: null,
         waiting: false
       });
     }
   }
 
-  async loadProfile() {
-    const token = this.getState().token
+  async restoreSession() {
+    const token = localStorage.getItem('token');
     if (!token) return;
 
+    this.setState({
+      ...this.getState(),
+      waiting: true
+    }, 'Проверяем сессию, ставим флаг ожидания');
+
     try {
-      const response = await fetch(`/api/v1/users/self?fields=*`,
+      const response = await fetch(`/api/v1/users/self?fields=token%2C_id%2Cprofile%28name%29`,
         {
           method: 'GET',
           headers: {
@@ -122,20 +134,31 @@ class AuthState extends StoreModule {
       this.setState({
         error: null,
         token,
-        user: { ...json.result },
+        _id: json.result._id,
         username: json.result.profile.name,
         waiting: false
-      }, 'Получены данные профиля из API');
+      }, 'Восстановлена сессия по данным токена');
 
     } catch (e) {
       // Ошибка при загрузке
+      localStorage.removeItem('token');
       this.setState({
-        error: e.error,
+        error: e.message,
+        token: null,
+        _id: null,
+        username: null,
         waiting: false
-      }, 'Ошибка получения данных профиля из API');
+      }, 'Ошибка восстановления сессии при проверке токена по API');
     }
-  }
 
+  }
+  resetErrorState() {
+    if (!this.getState().error) return
+    this.setState({
+      ...this.getState(),
+      error: null
+    }, 'Сброс ошибки');
+  }
 }
 
 export default AuthState;
