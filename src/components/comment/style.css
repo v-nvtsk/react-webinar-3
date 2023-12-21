@@ -1,0 +1,46 @@
+.Comment{
+  /* padding-bottom: 30px; */
+}
+.Comment-name {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.Comment-name_currentUser{
+color: #666666;
+}
+
+.Comment-date {
+  margin-left: 10px;
+  font-size: 12px;
+  line-height: 14px;
+  color: #666666;
+}
+
+.Comment-text {
+  margin: 10px 0;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.Comment-reply{
+  margin: 0;
+}
+
+.Comment-reply-link {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 14px;
+  color: #0087e9;
+}
+
+.Comment-reply-link:link,
+.Comment-reply-link:visited {
+  color: #0087e9;
+  text-decoration: none;
+}
+
+.Comment-reply-link:hover {
+  text-decoration: underline;
+}

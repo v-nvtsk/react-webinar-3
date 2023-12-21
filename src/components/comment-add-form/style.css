@@ -1,0 +1,48 @@
+.CommentAddForm {
+  /* padding: 15px 0 0;  */
+}
+
+.CommentAddForm_global {
+  padding: 0 40px;
+}
+
+.CommentAddForm-title {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.CommentAddForm-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.CommentAddForm-input {
+  margin-top: 10px;
+  max-width: 100%;
+  resize: none;
+  height: 76px;
+  background: #ffffff;
+  border: 1px solid #666666;
+  box-shadow: inset 0px 1px 4px rgba(102, 102, 102, 0.1);
+}
+
+.CommentAddForm-btn {
+  margin-top: 10px;
+  padding: 3px 8px 2px 9px;
+}
+
+.btn-cancel {
+  margin-left: 10px;
+}
+
+.CommentAddForm-not-authorized {
+  margin-top: 30px;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.CommentAddForm-not-authorized-link:link,
+.CommentAddForm-not-authorized-link:visited {
+  color: #0087e9;
+}
