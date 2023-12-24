@@ -11,12 +11,14 @@ function Comment({ currentUser, comment, onShowAddReplyForm }) {
     onClick: (e) => {
       e.preventDefault();
       setIsFormShown(!isFormShown);
-      console.log('isFormShown: ', isFormShown);
       onShowAddReplyForm(comment._id)
     }
   }
+  const MAX_LEVEL = 5;
+  const paddingLeft = comment.level <= MAX_LEVEL ? comment.level * 30 : MAX_LEVEL * 30;
+
   return (
-    <div className={cn()} style={{ 'paddingLeft': comment.level * 30 }}>
+    <div className={cn()} style={{ 'paddingLeft': paddingLeft }}>
       <div className={cn('head')}>
         <span className={cn('name', { currentUser: currentUser })}>{comment.author.profile.name}</span>
         <span className={cn('date')}>{dateFormat(comment.dateCreate)}</span>
