@@ -41,14 +41,11 @@ function CommentsBlock(props) {
   }));
 
   const callbacks = {
-    onAddComment: () => {
-    },
     onShowAddReplyForm: (id = props.articleId) => {
       setFormShownId(id);
-
     },
     onSubmitComment: ({ text, pid = props.articleId, pType }) => {
-      if (!text) return
+      if (text.trim().length === 0) return
       dispatch(commentActions.add(text, pid, pType, select.token))
       setFormShownId(props.articleId)
       dispatch(commentActions.load(props.articleId))
