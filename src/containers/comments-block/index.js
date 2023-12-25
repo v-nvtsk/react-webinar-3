@@ -19,7 +19,6 @@ import shallowEqual from 'shallowequal';
 
 function CommentsBlock(props) {
 
-  // const [IsArticleAddFormShown, setIsArticleAddFormShown] = useState(true);
   const [formShownId, setFormShownId] = useState(props.articleId)
   const dispatch = useDispatch();
   const { t } = useTranslate();
@@ -38,7 +37,8 @@ function CommentsBlock(props) {
 
   const select = useSelector(state => ({
     token: state.session.token,
-    userId: state.session.user._id
+    userId: state.session.user._id,
+    user: state.session.user
   }));
 
   const callbacks = {
@@ -61,7 +61,6 @@ function CommentsBlock(props) {
     }
   }, [reduxSelect.comments]);
 
-
   const renders = {
     form: useCallback(comment => {
       return (<>
@@ -76,20 +75,21 @@ function CommentsBlock(props) {
           t={t} />}
       </>)
 
-    }),
+    }, [formShownId, callbacks.onSubmitComment, callbacks.onShowAddReplyForm, select.token, t]),
     comment: useCallback(comment => {
+      if (!comment.author?.profile) comment.author.profile = { ...select.user.profile }
       return (<>
         <Comment currentUser={comment.author._id === select.userId} comment={comment} formShownId={formShownId}
           key={comment._id} onShowAddReplyForm={callbacks.onShowAddReplyForm} t={t} />
       </>)
-    }, [formShownId, callbacks.addToBasket, select.token, t]),
+    }, [formShownId, select.userId, callbacks.onShowAddReplyForm, select.token, t]),
   };
 
   return (
     <Spinner active={reduxSelect.waiting}>
       <CommentsHead commentsCount={reduxSelect.commentsCount} t={t} />
       {commentsTree && <CommentList commentsTree={commentsTree} renderItem={renders.comment} renderForm={renders.form} t={t} />}
-      {formShownId === props.articleId && <CommentAddForm token={select.token} pType={'article'} level={-1} onSubmitComment={callbacks.onSubmitComment} t={t} />}
+      {(formShownId === props.articleId && !reduxSelect.waiting) && <CommentAddForm token={select.token} pType={'article'} level={-1} onSubmitComment={callbacks.onSubmitComment} t={t} />}
     </Spinner>
   );
 }

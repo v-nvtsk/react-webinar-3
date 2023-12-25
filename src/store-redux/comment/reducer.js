@@ -17,7 +17,10 @@ function reducer(state = initialState, action) {
       return { ...state, waiting: true };
 
     case "comment/add-success":
-      return { ...state, waiting: false };
+      const items = [...state.data.items, action.payload.data].sort((a, b) => {
+        return (new Date(a.dateCreate) - new Date(b.dateCreate))
+      });
+      return { ...state, data: { items: [...items], count: items.length }, waiting: false };
 
     case "comment/load-error":
       return { ...state, data: {}, waiting: false }; //@todo текст ошибки сохранять?

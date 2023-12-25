@@ -8,13 +8,14 @@ import { useCallback } from 'react';
 function CommentAddForm(props) {
   const navigate = useNavigate();
   const inputRef = useRef();
+  const formRef = useRef();
   const { t } = props;
   const cn = bem('CommentAddForm');
   const [commentText, setCommentText] = useState('');
 
   useEffect(() => {
     if (props.level >= 0) {
-      inputRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      formRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }, [props.level])
 
@@ -41,7 +42,7 @@ function CommentAddForm(props) {
     }, [location.pathname]),
   }
 
-  return (<div className={cn({ global: props.level === -1 })} style={{ paddingLeft: props.level >= 0 ? (props.level * 30) : 40 }}>
+  return (<div ref={formRef} className={cn({ global: props.level === -1 })} style={{ paddingLeft: props.level >= 0 ? (props.level * 30) : 40 }}>
     {
       props.token ?
         <form className={cn('form')}>
