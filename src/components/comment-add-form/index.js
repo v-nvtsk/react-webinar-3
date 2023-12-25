@@ -8,7 +8,7 @@ import { useCallback } from 'react';
 function CommentAddForm(props) {
   const navigate = useNavigate();
   const inputRef = useRef();
-
+  const { t } = props;
   const cn = bem('CommentAddForm');
   const [commentText, setCommentText] = useState('');
 
@@ -46,23 +46,25 @@ function CommentAddForm(props) {
       props.token ?
         <form className={cn('form')}>
           <label className={cn('title')} htmlFor="comment-reply">
-            {props.pType === 'article' ? 'Новый комментарий' : 'Новый ответ'}
+            {props.pType === 'article' ? t('comment.newComment') : t('comment.newReply')}
           </label>
           <textarea ref={inputRef} className={cn('input')} type="text" name="comment-reply" id="comment-reply" onChange={callbacks.onChange} cols="40" rows="5"></textarea>
           <div>
-            <input className={cn('btn', 'btn-submit')} type="submit" value="Отправить" onClick={callbacks.onSubmit} />
-            {props.pType !== 'article' && <input className={cn('btn', 'btn-cancel')} type="submit" value="Отменить" onClick={callbacks.onCancel} />}
+            <input className={cn('btn', 'btn-submit')} type="submit" value={t('comment.submit')} onClick={callbacks.onSubmit} />
+            {props.pType !== 'article' && <input className={cn('btn', 'btn-cancel')} type="submit"
+              value={t('comment.cancel')} onClick={callbacks.onCancel} />}
           </div>
         </form>
         :
-        <p className={cn('not-authorized')}><Link className={cn('not-authorized-link')} to="/login" onClick={callbacks.onSignIn}>Войдите</Link>, чтобы иметь возможность комментировать</p>
+        <p className={cn('not-authorized')}><Link className={cn('not-authorized-link')} to="/login" onClick={callbacks.onSignIn}>{t('comment.signIn')}</Link>{t('comment.signInTitle')}</p>
     }
   </div>
   )
 }
 
 CommentAddForm.propTypes = {
-  onSubmit: PropTypes.func
+  onSubmit: PropTypes.func,
+  t: PropTypes.func
 };
 
 export default CommentAddForm

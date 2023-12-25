@@ -1,9 +1,9 @@
 import React from 'react'
 import './style.css'
 
-function CommentsHead({ commentsCount }) {
+function CommentsHead({ commentsCount, t }) {
   return (
-    <h2 className={'Comments-title'}>Комментарии ({commentsCount})</h2>
+    <h2 className={'Comments-title'}>{t('comment.title')} ({commentsCount})</h2>
   )
 }
 

@@ -22,6 +22,7 @@ function CommentsBlock(props) {
   // const [IsArticleAddFormShown, setIsArticleAddFormShown] = useState(true);
   const [formShownId, setFormShownId] = useState(props.articleId)
   const dispatch = useDispatch();
+  const { t } = useTranslate();
 
 
   const reduxSelect = useReduxSelector(state => ({
@@ -60,7 +61,6 @@ function CommentsBlock(props) {
     }
   }, [reduxSelect.comments]);
 
-  const { t } = useTranslate();
 
   const renders = {
     form: useCallback(comment => {
@@ -80,16 +80,16 @@ function CommentsBlock(props) {
     comment: useCallback(comment => {
       return (<>
         <Comment currentUser={comment.author._id === select.userId} comment={comment} formShownId={formShownId}
-          key={comment._id} onShowAddReplyForm={callbacks.onShowAddReplyForm} />
+          key={comment._id} onShowAddReplyForm={callbacks.onShowAddReplyForm} t={t} />
       </>)
     }, [formShownId, callbacks.addToBasket, select.token, t]),
   };
 
   return (
     <Spinner active={reduxSelect.waiting}>
-      <CommentsHead commentsCount={reduxSelect.commentsCount} t />
-      {commentsTree && <CommentList commentsTree={commentsTree} renderItem={renders.comment} renderForm={renders.form} t />}
-      {formShownId === props.articleId && <CommentAddForm token={select.token} pType={'article'} level={-1} onSubmitComment={callbacks.onSubmitComment} t />}
+      <CommentsHead commentsCount={reduxSelect.commentsCount} t={t} />
+      {commentsTree && <CommentList commentsTree={commentsTree} renderItem={renders.comment} renderForm={renders.form} t={t} />}
+      {formShownId === props.articleId && <CommentAddForm token={select.token} pType={'article'} level={-1} onSubmitComment={callbacks.onSubmitComment} t={t} />}
     </Spinner>
   );
 }

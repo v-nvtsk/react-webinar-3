@@ -2,7 +2,7 @@ import dateFormat from '../../utils/date-format';
 import './style.css'
 import { cn as bem } from '@bem-react/classname'
 
-function Comment({ currentUser, comment, onShowAddReplyForm, formShownId }) {
+function Comment({ currentUser, comment, onShowAddReplyForm, formShownId, t }) {
   const cn = bem('Comment');
 
   const callbacks = {
@@ -28,8 +28,8 @@ function Comment({ currentUser, comment, onShowAddReplyForm, formShownId }) {
       </div>
       <p className={cn('text')}>{comment.text}</p>
       <p className={cn('reply')}>
-        <a className={cn('reply-link')} href="" onClick={callbacks.onClick}>Ответить</a>
-        {showCancelBtn && <a className={cn('cancel-link')} href="" onClick={callbacks.onCancel}>Отменить</a>}
+        <a className={cn('reply-link')} href="" onClick={callbacks.onClick}>{t('comment.reply')}</a>
+        {showCancelBtn && <a className={cn('cancel-link')} href="" onClick={callbacks.onCancel}>{t('comment.cancel')}</a>}
       </p>
     </div >
   )
