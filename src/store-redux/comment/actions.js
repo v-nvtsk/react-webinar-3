@@ -46,7 +46,7 @@ export default {
 
       } catch (e) {
         //Ошибка загрузки
-        dispatch({ type: 'comment/load-error' });
+        dispatch({ type: 'comment/add-error' });
       }
     }
   },
