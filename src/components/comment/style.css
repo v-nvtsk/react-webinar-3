@@ -1,5 +1,5 @@
-.Comment{
-  /* padding-bottom: 30px; */
+.Comment {
+  padding: 15px 0;
 }
 .Comment-name {
   font-weight: 700;
@@ -7,8 +7,8 @@
   line-height: 14px;
 }
 
-.Comment-name_currentUser{
-color: #666666;
+.Comment-name_currentUser {
+  color: #666666;
 }
 
 .Comment-date {
@@ -25,19 +25,26 @@ color: #666666;
   line-height: 16px;
 }
 
-.Comment-reply{
+.Comment-reply {
   margin: 0;
 }
 
-.Comment-reply-link {
+.Comment-reply-link,
+.Comment-cancel-link {
   margin-top: 10px;
   font-size: 12px;
   line-height: 14px;
   color: #0087e9;
 }
 
+.Comment-cancel-link{
+  margin-left: 10px;
+}
+
 .Comment-reply-link:link,
-.Comment-reply-link:visited {
+.Comment-reply-link:visited,
+.Comment-cancel-link:link,
+.Comment-cancel-link:visited {
   color: #0087e9;
   text-decoration: none;
 }

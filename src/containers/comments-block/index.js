@@ -19,7 +19,7 @@ import shallowEqual from 'shallowequal';
 
 function CommentsBlock(props) {
 
-  const [IsArticleAddFormShown, setIsArticleAddFormShown] = useState(true);
+  // const [IsArticleAddFormShown, setIsArticleAddFormShown] = useState(true);
   const [formShownId, setFormShownId] = useState(props.articleId)
   const dispatch = useDispatch();
 
@@ -48,23 +48,23 @@ function CommentsBlock(props) {
       if (text.trim().length === 0) return
       dispatch(commentActions.add(text, pid, pType, select.token))
       setFormShownId(props.articleId)
-      dispatch(commentActions.load(props.articleId))
+      // dispatch(commentActions.load(props.articleId))
     }
   }
 
-  const commentsList = useMemo(() => ([
-    ...treeToList(listToTree(reduxSelect.comments), (item, level) => (
-      { ...item, level: level - 1 })
-    )
-  ].slice(1)), [reduxSelect.comments]);
+  const commentsTree = useMemo(() => {
+    if (reduxSelect.comments.length > 0) {
+      return listToTree(reduxSelect.comments)[0]
+    } else {
+      return null;
+    }
+  }, [reduxSelect.comments]);
 
   const { t } = useTranslate();
 
   const renders = {
-    comment: useCallback(comment => {
+    form: useCallback(comment => {
       return (<>
-        <Comment currentUser={comment.author._id === select.userId} comment={comment}
-          key={comment._id} onShowAddReplyForm={callbacks.onShowAddReplyForm} />
         {formShownId === comment._id && <CommentAddForm
           comment={comment}
           pid={comment._id}
@@ -75,13 +75,20 @@ function CommentsBlock(props) {
           onCancel={callbacks.onShowAddReplyForm}
           t={t} />}
       </>)
+
+    }),
+    comment: useCallback(comment => {
+      return (<>
+        <Comment currentUser={comment.author._id === select.userId} comment={comment} formShownId={formShownId}
+          key={comment._id} onShowAddReplyForm={callbacks.onShowAddReplyForm} />
+      </>)
     }, [formShownId, callbacks.addToBasket, select.token, t]),
   };
 
   return (
     <Spinner active={reduxSelect.waiting}>
       <CommentsHead commentsCount={reduxSelect.commentsCount} t />
-      <CommentList list={commentsList} renderItem={renders.comment} t />
+      {commentsTree && <CommentList commentsTree={commentsTree} renderItem={renders.comment} renderForm={renders.form} t />}
       {formShownId === props.articleId && <CommentAddForm token={select.token} pType={'article'} level={-1} onSubmitComment={callbacks.onSubmitComment} t />}
     </Spinner>
   );

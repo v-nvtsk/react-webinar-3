@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname'
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,9 +7,16 @@ import { useCallback } from 'react';
 
 function CommentAddForm(props) {
   const navigate = useNavigate();
+  const inputRef = useRef();
 
   const cn = bem('CommentAddForm');
   const [commentText, setCommentText] = useState('');
+
+  useEffect(() => {
+    if (props.level >= 0) {
+      inputRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [props.level])
 
   const callbacks = {
     onSubmit: useCallback((e) => {
@@ -34,14 +41,14 @@ function CommentAddForm(props) {
     }, [location.pathname]),
   }
 
-  return (<div className={cn({ global: props.level === -1 })} style={{ paddingLeft: props.level >= 0 ? (40 + props.level * 30) : 40 }}>
+  return (<div className={cn({ global: props.level === -1 })} style={{ paddingLeft: props.level >= 0 ? (props.level * 30) : 40 }}>
     {
       props.token ?
         <form className={cn('form')}>
           <label className={cn('title')} htmlFor="comment-reply">
             {props.pType === 'article' ? 'Новый комментарий' : 'Новый ответ'}
           </label>
-          <textarea className={cn('input')} type="text" name="comment-reply" id="comment-reply" onChange={callbacks.onChange} cols="40" rows="5"></textarea>
+          <textarea ref={inputRef} className={cn('input')} type="text" name="comment-reply" id="comment-reply" onChange={callbacks.onChange} cols="40" rows="5"></textarea>
           <div>
             <input className={cn('btn', 'btn-submit')} type="submit" value="Отправить" onClick={callbacks.onSubmit} />
             {props.pType !== 'article' && <input className={cn('btn', 'btn-cancel')} type="submit" value="Отменить" onClick={callbacks.onCancel} />}

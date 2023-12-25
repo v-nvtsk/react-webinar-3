@@ -1,30 +1,24 @@
-import {memo} from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
-import Item from '../item';
+import CommentsListItem from '../comments-list-item'
 import './style.css';
 
-function CommentsList({list, renderItem}) {
-  return (
-    <div className='CommentsList'>{
-      list.map(item =>
-        <div key={item._id} className='CommentsList-item'>
-          {renderItem(item)}
-        </div>
-      )}
-    </div>
-  )
+function CommentsList({ renderItem, renderForm, commentsTree }) {
+  return (commentsTree && <div className='CommentsList'>
+    {commentsTree?.children?.map((item) => {
+      return <CommentsListItem key={item._id}
+        item={item} level={0}
+        renderItem={renderItem}
+        renderForm={renderForm} />
+    })
+    }
+  </div>)
 }
 
 CommentsList.propTypes = {
-  list: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  })).isRequired,
-  renderItem: PropTypes.func,
+  commentsTree: PropTypes.object.isRequired,
+  renderItem: PropTypes.func.isRequired,
+  renderForm: PropTypes.func.isRequired,
 };
-
-CommentsList.defaultProps = {
-  renderItem: (item) => {
-  },
-}
 
 export default memo(CommentsList);
