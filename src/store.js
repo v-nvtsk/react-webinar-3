@@ -5,6 +5,7 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
+    this.newCode = this.id();
   }
 
   /**
@@ -39,12 +40,22 @@ class Store {
   }
 
   /**
+   * Генератор id для записей с хранением значения в замыкании
+   */
+  id() {
+    let counter = this.state.list[this.state.list.length - 1].code;
+    return () => {
+      return ++counter;
+    }
+
+  }
+  /**
    * Добавление новой записи
    */
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
+      list: [...this.state.list, { code: this.newCode(), title: 'Новая запись' }]
     })
   };
 
@@ -69,6 +80,9 @@ class Store {
       list: this.state.list.map(item => {
         if (item.code === code) {
           item.selected = !item.selected;
+          if (item.selected) item.selectedCount = item.selectedCount + 1 || 1;
+        } else {
+          item.selected = false;
         }
         return item;
       })
